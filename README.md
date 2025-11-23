@@ -171,11 +171,6 @@ The frontend will start on `http://localhost:4200`
 - Image URL support
 - Comprehensive car data management
 
-## 🎯 Demo Credentials
-
-**Admin Panel:**
-- Username: `admin`
-- Password: `admin`
 
 ## 📝 Seed Data
 
