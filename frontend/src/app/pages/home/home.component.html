@@ -1,27 +1,32 @@
 <!-- Hero Banner -->
 <section class="hero-section">
-  <div class="hero-content">
-    <div class="hero-text fade-in">
+  <div class="video-background">
+    <video autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-driving-a-car-at-sunset-4033-large.mp4"
+        type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <div class="hero-content container">
+    <div class="hero-text animate-fade-up">
       <h1 class="hero-title">
-        Discover the World of
-        <span class="gradient-text">Automobiles</span>
+        Experience the <br>
+        <span class="text-neon">Future of Speed</span>
       </h1>
       <p class="hero-subtitle">
-        Explore premium vehicles, learn about automotive history, and dive into the future of transportation.
+        Discover premium vehicles, automotive history, and the next generation of transportation.
       </p>
       <div class="hero-buttons">
-        <a routerLink="/explore" class="btn btn-primary">Explore Cars</a>
+        <a routerLink="/explore" class="btn btn-primary">Explore Collection</a>
         <a routerLink="/knowledge" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
-    <div class="hero-image fade-in" style="animation-delay: 0.2s">
-      <div class="car-image-placeholder">
-        <div class="car-silhouette">🚗</div>
-      </div>
-    </div>
   </div>
+
   <div class="hero-scroll-indicator">
-    <span>Scroll to explore</span>
+    <span>Scroll to Explore</span>
     <div class="scroll-arrow">↓</div>
   </div>
 </section>
@@ -29,12 +34,73 @@
 <!-- Featured Car of the Day -->
 <section class="featured-section" *ngIf="!loading">
   <div class="container">
+    <h2 class="section-title text-gradient">Featured Machine</h2>
+    <div class="featured-card glass-card" *ngIf="featuredCar">
+      <div class="featured-image">
+        <img [src]="featuredCar.imageUrl || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'"
+          [alt]="featuredCar.name"
+          (error)="($any($event.target)).src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'">
+        <div class="featured-badge">Featured</div>
+      </div>
+      <div class="featured-content">
+        <div class="featured-brand text-neon">{{ featuredCar.brand }}</div>
+        <h3 class="featured-name">{{ featuredCar.name }}</h3>
+        <p class="featured-description">{{ featuredCar.description }}</p>
+        <div class="featured-specs">
+          <div class="spec-item">
+            <span class="spec-label">Power</span>
+            <span class="spec-value">{{ featuredCar.horsepower || 'N/A' }} HP</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Top Speed</span>
+            <span class="spec-value">{{ featuredCar.topSpeed || 'N/A' }} km/h</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Price</span>
+            <span class="spec-value">${{ featuredCar.price ? featuredCar.price.toLocaleString() : 'N/A' }}</span>
+          </div>
+        </div>
+        <a [routerLink]="['/car', featuredCar.id]" class="btn btn-primary">View Specs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Category Highlights -->
+<section class="categories-section">
+  <div class="container">
+    <h2 class="section-title text-gradient">Explore Categories</h2>
+    <div class="categories-grid">
+      <div class="category-card glass-card" *ngFor="let category of categories" [routerLink]="['/explore']"
+        [queryParams]="{type: category.name.split(' ')[0]}">
+        <div class="category-icon text-neon">{{ category.icon }}</div>
+        <h3 class="category-name">{{ category.name }}</h3>
+        <p class="category-count">{{ category.count }} vehicles</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Parallax Section -->
+<section class="parallax-section">
+  <div class="parallax-content animate-fade-up">
+    <h2 class="parallax-title">Automotive Excellence</h2>
+    <p class="parallax-text">From classic legends to futuristic hypercars</p>
+  </div>
+</section>
+
+<!-- Loading State -->
+<app-loading *ngIf="loading"></app-loading>
+
+<!-- Featured Car of the Day -->
+<section class="featured-section" *ngIf="!loading">
+  <div class="container">
     <h2 class="section-title">Featured Car of the Day</h2>
     <div class="featured-card" *ngIf="featuredCar">
       <div class="featured-image">
-        <img [src]="featuredCar.imageUrl || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'" 
-             [alt]="featuredCar.name" 
-             (error)="($any($event.target)).src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'">
+        <img [src]="featuredCar.imageUrl || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'"
+          [alt]="featuredCar.name"
+          (error)="($any($event.target)).src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'">
         <div class="featured-badge">Featured</div>
       </div>
       <div class="featured-content">
@@ -66,9 +132,8 @@
   <div class="container">
     <h2 class="section-title">Explore by Category</h2>
     <div class="categories-grid">
-      <div class="category-card" *ngFor="let category of categories" 
-           [routerLink]="['/explore']" 
-           [queryParams]="{type: category.name.split(' ')[0]}">
+      <div class="category-card" *ngFor="let category of categories" [routerLink]="['/explore']"
+        [queryParams]="{type: category.name.split(' ')[0]}">
         <div class="category-icon">{{ category.icon }}</div>
         <h3 class="category-name">{{ category.name }}</h3>
         <p class="category-count">{{ category.count }} vehicles</p>
@@ -87,4 +152,3 @@
 
 <!-- Loading State -->
 <app-loading *ngIf="loading"></app-loading>
-

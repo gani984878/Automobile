@@ -1,91 +1,143 @@
 .login-container {
-  min-height: calc(100vh - 200px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.7);
+      backdrop-filter: blur(8px);
+    }
+  }
 }
 
 .login-card {
-  background: var(--light-surface);
+  position: relative;
+  z-index: 1;
   padding: 3rem;
-  border-radius: 20px;
-  box-shadow: var(--shadow-lg);
-  max-width: 400px;
   width: 100%;
+  max-width: 450px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 10, 0.6);
 
-  body.dark-mode & {
-    background: var(--dark-surface);
-  }
-
-  .login-title {
-    font-size: 2rem;
-    font-weight: 900;
+  .login-header {
     text-align: center;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #2563eb, #f59e0b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    margin-bottom: 3rem;
 
-  .login-subtitle {
-    text-align: center;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+    .logo-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 15px var(--primary-glow));
+    }
+
+    .login-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      letter-spacing: 3px;
+    }
+
+    .login-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
   }
 
   .login-form {
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
 
       label {
         display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: var(--text-primary);
+        margin-bottom: 0.8rem;
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
 
       input {
         width: 100%;
-        padding: 0.75rem;
-        border: 2px solid var(--border-color);
-        border-radius: 8px;
-        background: var(--light-bg);
-        color: var(--text-primary);
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        color: white;
+        font-family: var(--font-body);
         font-size: 1rem;
-        transition: border-color 0.3s ease;
-
-        body.dark-mode & {
-          background: var(--dark-bg);
-        }
+        transition: all 0.3s ease;
 
         &:focus {
           outline: none;
+          background: rgba(255, 255, 255, 0.1);
           border-color: var(--primary-color);
+          box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.3);
         }
       }
     }
 
     .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
       color: #ef4444;
-      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
       text-align: center;
       font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .btn-block {
       width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
     }
   }
 
   .login-hint {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 2px solid var(--border-color);
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+
+    p {
+      margin: 0;
+    }
   }
 }
-

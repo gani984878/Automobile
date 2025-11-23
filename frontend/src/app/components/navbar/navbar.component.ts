@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 
@@ -11,10 +11,17 @@ export class NavbarComponent implements OnInit {
   isDarkMode = false;
   isMenuOpen = false;
 
+  isScrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
+
   constructor(
     private router: Router,
     private themeService: ThemeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.themeService.isDarkMode$.subscribe(isDark => {

@@ -1,28 +1,29 @@
-<nav class="navbar" [class.dark]="isDarkMode">
+<nav class="navbar glass-panel" [class.scrolled]="isScrolled">
   <div class="container">
     <div class="nav-content">
       <div class="logo" (click)="navigateTo('')">
-        <span class="logo-icon">🚗</span>
-        <span class="logo-text">AutoHub</span>
+        <span class="logo-icon text-neon">⚡</span>
+        <span class="logo-text text-gradient">VELOCITY</span>
       </div>
-      
+
       <div class="nav-links" [class.active]="isMenuOpen">
-        <a (click)="navigateTo('')" class="nav-link">Home</a>
-        <a (click)="navigateTo('explore')" class="nav-link">Explore</a>
-        <a (click)="navigateTo('knowledge')" class="nav-link">Knowledge</a>
-        <a (click)="navigateTo('dashboard')" class="nav-link">Dashboard</a>
-        <a (click)="navigateTo('admin')" class="nav-link">Admin</a>
-        <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+        <a (click)="navigateTo('')" class="nav-link" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a (click)="navigateTo('explore')" class="nav-link" routerLinkActive="active">Explore</a>
+        <a (click)="navigateTo('knowledge')" class="nav-link" routerLinkActive="active">Intel</a>
+        <a (click)="navigateTo('dashboard')" class="nav-link" routerLinkActive="active">Command</a>
+        <a (click)="navigateTo('admin')" class="nav-link" routerLinkActive="active">Admin</a>
+        <button class="theme-toggle btn-icon" (click)="toggleTheme()"
+          [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
           {{ isDarkMode ? '☀️' : '🌙' }}
         </button>
       </div>
-      
+
       <button class="menu-toggle" (click)="toggleMenu()" [attr.aria-label]="'Toggle menu'">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </button>
     </div>
   </div>
 </nav>
-

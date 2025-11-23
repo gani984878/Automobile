@@ -1,61 +1,99 @@
 .dashboard-container {
-  padding: 2rem 0;
-  min-height: calc(100vh - 200px);
+  min-height: 100vh;
+  position: relative;
+  padding-top: 80px;
+  overflow-x: hidden;
+
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(5px);
+    }
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .dashboard-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 
   .page-title {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 900;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #2563eb, #f59e0b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
   }
 
   .page-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 }
 
 .stats-overview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 
   .stat-card {
-    background: var(--light-surface);
-    padding: 2rem;
-    border-radius: 16px;
+    padding: 2.5rem;
     text-align: center;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 
-    body.dark-mode & {
-      background: var(--dark-surface);
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+      opacity: 0.5;
     }
 
     .stat-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 10px var(--primary-glow));
     }
 
     .stat-value {
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: var(--primary-color);
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: white;
       margin-bottom: 0.5rem;
+      line-height: 1;
     }
 
     .stat-label {
@@ -63,83 +101,111 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 }
 
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 2rem;
+  padding-bottom: 4rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 
   .chart-card {
-    background: var(--light-surface);
     padding: 2rem;
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-
-    body.dark-mode & {
-      background: var(--dark-surface);
-    }
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
 
     .chart-title {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
       color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 3px solid var(--primary-color);
+      padding-left: 1rem;
     }
 
     .chart-container {
-      height: 300px;
+      flex: 1;
       position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
     }
 
     .gauge-container {
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 300px;
 
       .gauge {
         text-align: center;
         width: 100%;
         max-width: 300px;
+        position: relative;
+
+        .gauge-ring {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          border: 10px solid rgba(255, 255, 255, 0.05);
+          margin: 0 auto 2rem;
+          position: relative;
+          box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 10px solid transparent;
+            border-top-color: var(--primary-color);
+            border-right-color: var(--secondary-color);
+            animation: spin 3s linear infinite;
+          }
+        }
 
         .gauge-value {
+          position: absolute;
+          top: 80px;
+          left: 50%;
+          transform: translateX(-50%);
           font-size: 4rem;
           font-weight: 900;
-          color: var(--primary-color);
-          margin-bottom: 0.5rem;
+          font-family: var(--font-display);
         }
 
         .gauge-label {
-          font-size: 1.25rem;
+          font-size: 1rem;
           color: var(--text-secondary);
-          margin-bottom: 2rem;
+          margin-bottom: 1rem;
+          letter-spacing: 2px;
         }
 
-        .gauge-bar {
+        .gauge-bar-container {
           width: 100%;
-          height: 20px;
-          background: var(--light-bg);
-          border-radius: 10px;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 3px;
           overflow: hidden;
-          position: relative;
 
-          body.dark-mode & {
-            background: var(--dark-bg);
-          }
-
-          .gauge-fill {
+          .gauge-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #2563eb, #f59e0b);
-            border-radius: 10px;
-            transition: width 1s ease;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 0 10px var(--primary-glow);
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
           }
         }
       }
@@ -147,3 +213,12 @@
   }
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
