@@ -1,0 +1,212 @@
+.knowledge-container {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.knowledge-header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  .page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #2563eb, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.history-section {
+  margin-bottom: 5rem;
+
+  .history-content {
+    background: var(--light-surface);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+
+    body.dark-mode & {
+      background: var(--dark-surface);
+    }
+
+    .history-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.timeline-section {
+  margin-bottom: 5rem;
+
+  .timeline {
+    position: relative;
+    padding-left: 3rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #2563eb, #f59e0b);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 2rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: -2.75rem;
+        top: 0.5rem;
+        width: 16px;
+        height: 16px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        border: 4px solid var(--light-bg);
+        box-shadow: 0 0 0 4px var(--primary-color);
+
+        body.dark-mode & {
+          border-color: var(--dark-bg);
+        }
+      }
+
+      .timeline-year {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-content {
+        background: var(--light-surface);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+
+        body.dark-mode & {
+          background: var(--dark-surface);
+        }
+
+        &:hover {
+          transform: translateX(10px);
+        }
+
+        .timeline-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-bottom: 0.75rem;
+          color: var(--text-primary);
+        }
+
+        .timeline-description {
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+}
+
+.pioneers-section {
+  margin-bottom: 5rem;
+
+  .pioneers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+
+    .pioneer-card {
+      background: var(--light-surface);
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+
+      body.dark-mode & {
+        background: var(--dark-surface);
+      }
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .pioneer-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+      }
+
+      .pioneer-name {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .pioneer-contribution {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+.charts-section {
+  .comparison-info {
+    background: var(--light-surface);
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+
+    body.dark-mode & {
+      background: var(--dark-surface);
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+
+      .link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: var(--secondary-color);
+        }
+      }
+    }
+  }
+}
+

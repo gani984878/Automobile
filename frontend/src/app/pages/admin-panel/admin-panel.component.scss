@@ -1,0 +1,219 @@
+.admin-container {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #2563eb, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: var(--light-bg);
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+
+  body.dark-mode & {
+    background: var(--dark-bg);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 2px solid var(--border-color);
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .car-form {
+    padding: 2rem;
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group {
+        &.full-width {
+          grid-column: 1 / -1;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        input, textarea {
+          width: 100%;
+          padding: 0.75rem;
+          border: 2px solid var(--border-color);
+          border-radius: 8px;
+          background: var(--light-surface);
+          color: var(--text-primary);
+          font-size: 1rem;
+          transition: border-color 0.3s ease;
+
+          body.dark-mode & {
+            background: var(--dark-surface);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: var(--primary-color);
+          }
+        }
+
+        textarea {
+          resize: vertical;
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border-color);
+    }
+  }
+}
+
+.cars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .car-item {
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    gap: 2rem;
+    background: var(--light-surface);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    align-items: center;
+
+    body.dark-mode & {
+      background: var(--dark-surface);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .car-item-image {
+      width: 150px;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .car-item-info {
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      p {
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .car-price {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-color);
+      }
+    }
+
+    .car-item-actions {
+      display: flex;
+      gap: 1rem;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      .btn-danger {
+        background: #ef4444;
+        color: white;
+
+        &:hover {
+          background: #dc2626;
+        }
+      }
+    }
+  }
+}
+

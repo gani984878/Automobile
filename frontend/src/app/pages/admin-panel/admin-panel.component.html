@@ -1,0 +1,126 @@
+<div class="admin-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="admin-header">
+      <h1 class="page-title">Admin Panel</h1>
+      <button class="btn btn-primary" (click)="openAddForm()">Add New Car</button>
+    </div>
+
+    <!-- Car Form Modal -->
+    <div class="modal-overlay" *ngIf="showForm" (click)="closeForm()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>{{ editingCar ? 'Edit Car' : 'Add New Car' }}</h2>
+          <button class="close-btn" (click)="closeForm()">×</button>
+        </div>
+        <form [formGroup]="carForm" (ngSubmit)="saveCar()" class="car-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Name *</label>
+              <input type="text" formControlName="name" required>
+            </div>
+            <div class="form-group">
+              <label>Brand *</label>
+              <input type="text" formControlName="brand" required>
+            </div>
+            <div class="form-group">
+              <label>Type *</label>
+              <input type="text" formControlName="type" required>
+            </div>
+            <div class="form-group">
+              <label>Year *</label>
+              <input type="number" formControlName="year" required>
+            </div>
+            <div class="form-group">
+              <label>Price *</label>
+              <input type="number" formControlName="price" required>
+            </div>
+            <div class="form-group">
+              <label>Image URL</label>
+              <input type="url" formControlName="imageUrl">
+            </div>
+            <div class="form-group full-width">
+              <label>Description</label>
+              <textarea formControlName="description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Engine Type</label>
+              <input type="text" formControlName="engineType">
+            </div>
+            <div class="form-group">
+              <label>Horsepower</label>
+              <input type="number" formControlName="horsepower">
+            </div>
+            <div class="form-group">
+              <label>Torque (Nm)</label>
+              <input type="number" formControlName="torque">
+            </div>
+            <div class="form-group">
+              <label>Displacement (L)</label>
+              <input type="number" step="0.1" formControlName="displacement">
+            </div>
+            <div class="form-group">
+              <label>Top Speed (km/h)</label>
+              <input type="number" formControlName="topSpeed">
+            </div>
+            <div class="form-group">
+              <label>0-100 km/h (s)</label>
+              <input type="number" step="0.1" formControlName="acceleration0To100">
+            </div>
+            <div class="form-group">
+              <label>Fuel Economy (L/100km)</label>
+              <input type="number" step="0.1" formControlName="fuelEconomy">
+            </div>
+            <div class="form-group">
+              <label>Safety Rating (0-5)</label>
+              <input type="number" step="0.1" formControlName="safetyRating" min="0" max="5">
+            </div>
+            <div class="form-group">
+              <label>Performance Rating (0-10)</label>
+              <input type="number" step="0.1" formControlName="performanceRating" min="0" max="10">
+            </div>
+            <div class="form-group full-width">
+              <label>Tech Features (comma-separated)</label>
+              <input type="text" formControlName="techFeatures">
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" formControlName="isFeatured">
+                Featured Car
+              </label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!carForm.valid">
+              {{ editingCar ? 'Update' : 'Create' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Cars List -->
+    <div class="cars-list" *ngIf="!loading">
+      <div class="car-item" *ngFor="let car of cars">
+        <div class="car-item-image">
+          <img [src]="car.imageUrl || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'" 
+               [alt]="car.name"
+               (error)="($any($event.target)).src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'">
+        </div>
+        <div class="car-item-info">
+          <h3>{{ car.name }}</h3>
+          <p>{{ car.brand }} • {{ car.type }} • {{ car.year }}</p>
+          <p class="car-price">${{ car.price ? car.price.toLocaleString() : 'N/A' }}</p>
+        </div>
+        <div class="car-item-actions">
+          <button class="btn btn-secondary" (click)="openEditForm(car)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteCar(car.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <app-loading *ngIf="loading"></app-loading>
+  </div>
+</div>
+

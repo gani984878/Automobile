@@ -1,0 +1,6 @@
+<app-navbar></app-navbar>
+<div [@routeAnimations]="prepareRoute(routerOutlet)" class="main-content">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+</div>
+<app-footer></app-footer>
+

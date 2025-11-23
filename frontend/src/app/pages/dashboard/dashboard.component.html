@@ -1,0 +1,93 @@
+<div class="dashboard-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h1 class="page-title">Interactive Dashboard</h1>
+      <p class="page-subtitle">Visualize automobile data and trends</p>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="stats-overview" *ngIf="!loading && stats">
+      <div class="stat-card">
+        <div class="stat-icon">🚗</div>
+        <div class="stat-value">{{ stats.totalCars }}</div>
+        <div class="stat-label">Total Cars</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏭</div>
+        <div class="stat-value">{{ stats.totalBrands }}</div>
+        <div class="stat-label">Brands</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-value">{{ stats.totalTypes }}</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value">{{ stats.averagePerformanceRating.toFixed(1) }}</div>
+        <div class="stat-label">Avg Performance</div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="charts-grid" *ngIf="!loading">
+      <!-- Horsepower Trends -->
+      <div class="chart-card">
+        <h2 class="chart-title">Horsepower Trends</h2>
+        <div class="chart-container">
+          <canvas baseChart
+                  *ngIf="horsepowerChartData"
+                  [data]="horsepowerChartData"
+                  [type]="'line'"
+                  [options]="lineChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Type Distribution -->
+      <div class="chart-card">
+        <h2 class="chart-title">Car Types Distribution</h2>
+        <div class="chart-container">
+          <canvas baseChart
+                  *ngIf="typeChartData"
+                  [data]="typeChartData"
+                  [type]="'pie'"
+                  [options]="pieChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Sales by Year -->
+      <div class="chart-card">
+        <h2 class="chart-title">Cars by Year</h2>
+        <div class="chart-container">
+          <canvas baseChart
+                  *ngIf="salesChartData"
+                  [data]="salesChartData"
+                  [type]="'bar'"
+                  [options]="barChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <!-- Performance Gauge -->
+      <div class="chart-card">
+        <h2 class="chart-title">Average Performance Rating</h2>
+        <div class="gauge-container">
+          <div class="gauge">
+            <div class="gauge-value">{{ performanceRating.toFixed(1) }}</div>
+            <div class="gauge-label">out of 10</div>
+            <div class="gauge-bar">
+              <div class="gauge-fill" [style.width.%]="(performanceRating / 10) * 100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <app-loading *ngIf="loading"></app-loading>
+  </div>
+</div>
+

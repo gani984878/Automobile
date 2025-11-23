@@ -1,0 +1,62 @@
+<div class="knowledge-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="knowledge-header">
+      <h1 class="page-title">Automobile Knowledge Hub</h1>
+      <p class="page-subtitle">Explore the rich history and evolution of automobiles</p>
+    </div>
+
+    <!-- History Section -->
+    <section class="history-section">
+      <h2 class="section-title">History of Automobiles</h2>
+      <div class="history-content">
+        <p class="history-text">
+          The automobile has transformed human civilization, revolutionizing transportation, 
+          commerce, and daily life. From the first steam-powered vehicles in the 18th century 
+          to today's electric and autonomous cars, the journey of the automobile reflects 
+          humanity's relentless pursuit of innovation and progress.
+        </p>
+        <p class="history-text">
+          What started as a luxury for the wealthy has become an essential part of modern life, 
+          connecting communities, enabling commerce, and shaping the world we live in today.
+        </p>
+      </div>
+    </section>
+
+    <!-- Evolution Timeline -->
+    <section class="timeline-section">
+      <h2 class="section-title">Evolution Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item" *ngFor="let event of timelineEvents">
+          <div class="timeline-year">{{ event.year }}</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">{{ event.title }}</h3>
+            <p class="timeline-description">{{ event.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pioneers Section -->
+    <section class="pioneers-section">
+      <h2 class="section-title">Famous Automobile Pioneers</h2>
+      <div class="pioneers-grid">
+        <div class="pioneer-card" *ngFor="let pioneer of pioneers">
+          <div class="pioneer-icon">{{ pioneer.image }}</div>
+          <h3 class="pioneer-name">{{ pioneer.name }}</h3>
+          <p class="pioneer-contribution">{{ pioneer.contribution }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Charts Section -->
+    <section class="charts-section">
+      <h2 class="section-title">Interactive Comparisons</h2>
+      <div class="comparison-info">
+        <p>Visit the <a routerLink="/dashboard" class="link">Dashboard</a> to explore interactive charts 
+        showing horsepower trends, car type distributions, sales data, and performance metrics.</p>
+      </div>
+    </section>
+  </div>
+</div>
+

@@ -1,0 +1,101 @@
+<div class="car-detail-container" *ngIf="!loading && car">
+  <button class="back-btn" (click)="goBack()">← Back to Explorer</button>
+  
+  <div class="car-detail-content">
+    <!-- Main Image -->
+    <div class="car-image-section">
+      <img [src]="car.imageUrl || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'" 
+           [alt]="car.name"
+           (error)="($any($event.target)).src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'">
+      <div class="featured-badge" *ngIf="car.isFeatured">Featured</div>
+    </div>
+
+    <!-- Car Info -->
+    <div class="car-info-section">
+      <div class="car-header">
+        <div class="car-brand">{{ car.brand }}</div>
+        <h1 class="car-name">{{ car.name }}</h1>
+        <div class="car-meta">
+          <span class="meta-item">{{ car.year }}</span>
+          <span class="meta-item">{{ car.type }}</span>
+        </div>
+      </div>
+
+      <div class="car-price">${{ car.price ? car.price.toLocaleString() : 'N/A' }}</div>
+
+      <p class="car-description">{{ car.description }}</p>
+
+      <!-- Engine Specs -->
+      <div class="specs-section">
+        <h2>Engine Specifications</h2>
+        <div class="specs-grid">
+          <div class="spec-card" *ngIf="car.engineType">
+            <div class="spec-label">Engine Type</div>
+            <div class="spec-value">{{ car.engineType }}</div>
+          </div>
+          <div class="spec-card" *ngIf="car.horsepower">
+            <div class="spec-label">Horsepower</div>
+            <div class="spec-value">{{ car.horsepower }} HP</div>
+          </div>
+          <div class="spec-card" *ngIf="car.torque">
+            <div class="spec-label">Torque</div>
+            <div class="spec-value">{{ car.torque }} Nm</div>
+          </div>
+          <div class="spec-card" *ngIf="car.displacement">
+            <div class="spec-label">Displacement</div>
+            <div class="spec-value">{{ car.displacement }}L</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Stats -->
+      <div class="specs-section">
+        <h2>Performance</h2>
+        <div class="specs-grid">
+          <div class="spec-card" *ngIf="car.topSpeed">
+            <div class="spec-label">Top Speed</div>
+            <div class="spec-value">{{ car.topSpeed }} km/h</div>
+          </div>
+          <div class="spec-card" *ngIf="car.acceleration0To100">
+            <div class="spec-label">0-100 km/h</div>
+            <div class="spec-value">{{ car.acceleration0To100 }}s</div>
+          </div>
+          <div class="spec-card" *ngIf="car.fuelEconomy">
+            <div class="spec-label">Fuel Economy</div>
+            <div class="spec-value">{{ car.fuelEconomy }} L/100km</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Features -->
+      <div class="specs-section" *ngIf="car.techFeatures">
+        <h2>Tech Features</h2>
+        <div class="tech-features">
+          <span class="tech-tag" *ngFor="let feature of car.techFeatures.split(',')">
+            {{ feature.trim() }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Ratings -->
+      <div class="ratings-section">
+        <div class="rating-card" *ngIf="car.safetyRating">
+          <div class="rating-label">Safety Rating</div>
+          <div class="rating-stars">
+            <span *ngFor="let i of [1,2,3,4,5]" 
+                  [class.filled]="i <= car.safetyRating">
+              ★
+            </span>
+          </div>
+        </div>
+        <div class="rating-card" *ngIf="car.performanceRating">
+          <div class="rating-label">Performance Rating</div>
+          <div class="rating-value">{{ car.performanceRating }}/10</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>
+

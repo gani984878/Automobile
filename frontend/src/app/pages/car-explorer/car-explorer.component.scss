@@ -1,0 +1,233 @@
+.explorer-container {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.explorer-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  .page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #2563eb, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.filters-panel {
+  background: var(--light-surface);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  box-shadow: var(--shadow);
+
+  body.dark-mode & {
+    background: var(--dark-surface);
+  }
+
+  .filter-group {
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    select, input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--light-bg);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+
+      body.dark-mode & {
+        background: var(--dark-bg);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+    }
+
+    .range-inputs {
+      display: flex;
+      gap: 0.5rem;
+
+      input {
+        flex: 1;
+      }
+    }
+  }
+}
+
+.results-info {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.car-card {
+  background: var(--light-surface);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+
+  body.dark-mode & {
+    background: var(--dark-surface);
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .car-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
+    }
+
+    .car-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+  }
+
+  .car-info {
+    padding: 1.5rem;
+
+    .car-brand {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .car-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .car-specs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+
+      .spec {
+        padding: 0.25rem 0.75rem;
+        background: var(--light-bg);
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+
+        body.dark-mode & {
+          background: var(--dark-bg);
+        }
+      }
+    }
+
+    .car-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+
+  .page-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--light-surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+
+    body.dark-mode & {
+      background: var(--dark-surface);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .page-info {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+}
+

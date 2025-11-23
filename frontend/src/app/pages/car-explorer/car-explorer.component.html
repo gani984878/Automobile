@@ -1,0 +1,97 @@
+<div class="explorer-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="explorer-header">
+      <h1 class="page-title">Car Explorer</h1>
+      <p class="page-subtitle">Discover and filter through our collection of premium automobiles</p>
+      <button class="btn btn-secondary" (click)="showFilters = !showFilters">
+        {{ showFilters ? 'Hide' : 'Show' }} Filters
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-panel" *ngIf="showFilters">
+      <div class="filter-group">
+        <label>Type</label>
+        <select [(ngModel)]="filter.type" (change)="applyFilters()">
+          <option value="">All Types</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Brand</label>
+        <select [(ngModel)]="filter.brand" (change)="applyFilters()">
+          <option value="">All Brands</option>
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Year Range</label>
+        <div class="range-inputs">
+          <input type="number" [(ngModel)]="filter.startYear" placeholder="From" (change)="applyFilters()">
+          <input type="number" [(ngModel)]="filter.endYear" placeholder="To" (change)="applyFilters()">
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Price Range</label>
+        <div class="range-inputs">
+          <input type="number" [(ngModel)]="filter.minPrice" placeholder="Min" (change)="applyFilters()">
+          <input type="number" [(ngModel)]="filter.maxPrice" placeholder="Max" (change)="applyFilters()">
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" (click)="clearFilters()">Clear All</button>
+    </div>
+
+    <!-- Results Count -->
+    <div class="results-info">
+      <p>Showing {{ filteredCars.length }} car{{ filteredCars.length !== 1 ? 's' : '' }}</p>
+    </div>
+
+    <!-- Loading State -->
+    <app-loading *ngIf="loading"></app-loading>
+
+    <!-- Cars Grid -->
+    <div class="cars-grid" *ngIf="!loading && paginatedCars.length > 0">
+      <div class="car-card" *ngFor="let car of paginatedCars" (click)="viewCarDetails(car.id)">
+        <div class="car-image">
+          <img [src]="car.imageUrl || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'" 
+               [alt]="car.name"
+               (error)="($any($event.target)).src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'">
+          <div class="car-badge" *ngIf="car.isFeatured">Featured</div>
+        </div>
+        <div class="car-info">
+          <div class="car-brand">{{ car.brand }}</div>
+          <h3 class="car-name">{{ car.name }}</h3>
+          <div class="car-specs">
+            <span class="spec">{{ car.year }}</span>
+            <span class="spec">{{ car.type }}</span>
+            <span class="spec" *ngIf="car.horsepower">{{ car.horsepower }} HP</span>
+          </div>
+          <div class="car-price">${{ car.price ? car.price.toLocaleString() : 'N/A' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && filteredCars.length === 0">
+      <p>No cars found matching your filters.</p>
+      <button class="btn btn-primary" (click)="clearFilters()">Clear Filters</button>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="!loading && totalPages > 1">
+      <button class="page-btn" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+        Previous
+      </button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="page-btn" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+
