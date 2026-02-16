@@ -8,13 +8,7 @@ public class sample{
         int c = a+b;
         System.out.println(c);
 
-        if(c>20){
-
-            System.out.println("c is greater than 20");
         }
-        else{
-            System.out.println("c is less than 20");
-        }  
         
         
 }
